@@ -13,7 +13,8 @@ Vue.use(vuex)
 Vue.use(vueRouter)
 const store = new vuex.Store({
     state: {
-        num: 1
+        num: 1,
+        article: {}
     },
     mutations: {
         changeNum: (state, n) => state.num = n
