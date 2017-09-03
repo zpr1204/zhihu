@@ -14,7 +14,8 @@ Vue.use(vueRouter)
 const store = new vuex.Store({
     state: {
         num: 1,
-        article: {}
+        article: {},
+        theme: {},
     },
     mutations: {
         changeNum: (state, n) => state.num = n
@@ -28,3 +29,15 @@ new Vue({
     template: '<App/>',
     components: { App }
 })
+let dom = document.querySelector('.app-view');
+router.afterEach((to, from, next) => {
+    if (to.path == '/article') {
+        dom.scrollTop = 0;
+    } else {
+        Vue.nextTick(() => {
+            if (to.path == '/theme') {
+                store.commit('changeNum', location.href.split('=')[1]);
+            }
+        });
+    }
+});

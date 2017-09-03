@@ -29,6 +29,11 @@ import api from './api/index'
 import { mapState } from 'vuex'
 export default {
     name: 'app',
+    computed: {
+        ...mapState({
+            num: state => state.num
+        })
+    },
     data: function () {
         return {
             list: [],
@@ -37,15 +42,24 @@ export default {
             transitionName: 'slide-left'
         }
     },
+    watch: {
+        '$route' (to, from) {
+            let vue = this;
+            this.timer = setTimeout(function() {
+                if(vue.open){
+                    vue.open = false;
+                    vue.docked = false;
+                }
+                clearTimeout(vue.timer);
+            }, 300);
+            to.path == '/' && this.num != 1 && this.$store.commit('changeNum', 1);
+            this.transitionName = to.path != "/article" ? 'slide-right' : 'slide-left';
+        }
+    },
     mounted: function () {
         let vue = this;
         api.getTopics().then(function (data) {
             vue.list = data.data.others;
-        })
-    },
-    computed: {
-        ...mapState({
-            num: state => state.num
         })
     },
     methods: {

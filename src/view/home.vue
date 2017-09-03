@@ -27,7 +27,8 @@ export default {
         return {
             list: [],
             count: 1,
-            tops: []
+            tops: [],
+            loading: false
         }
     },
     methods: {
@@ -37,10 +38,12 @@ export default {
                 api.getNews().then(function (data) {
                     vue.tops = data.data.top_stories;
                     vue.list.push(data.data);
+                    vue.loading = false;
                 });
             } else {
                 api.getNewsByDate(vue.GetDate(vue.count)).then((data) => {
                     vue.list.push(data.data);
+                    vue.loading = false;
                 });
             }
         },
@@ -53,6 +56,14 @@ export default {
             var d = dd.getDate();
             d = d >= 10 ? d : "0" + d;
             return y + "" + m + "" + d;
+        },
+        loadMore(){
+            let vue = this;
+            this.loading = true;
+            setTimeout(()=>{
+                vue.count--;
+                vue.getList();
+            },500)
         },
         go(id){
             this.$router.push({
