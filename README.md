@@ -1,21 +1,9 @@
-# zhihu
+# 知乎日报
 
-> A Vue.js project
-
-## Build Setup
+## 简介
+- 该项目api来自知乎，使用vue-cli构建、打包, 配合vue全家桶（vue、vuex、vue-router）进行编码、使用axios进行资源请求
+## 运行方法
 
 ``` bash
-# install dependencies
 npm install
-
-# serve with hot reload at localhost:8080
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
